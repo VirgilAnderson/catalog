@@ -5,5 +5,27 @@
   </head>
   <body>
     <h1>This page will enable item edits</h1>
+    <main>
+      <form>
+        <fieldset>
+          <p>
+            <label for='name'>Item Name:</label><br>
+            <input type='text' name='name' placeholder='{{item.name}}'>
+          </p>
+          <p>
+            <label for='description'>Item Description:</label><br>
+            <input type='text' name='description' placeholder='{{item.description}}'>
+          </p>
+          <p>
+            <label for='name'>Item Price:</label><br>
+            <input type='text' name='price' placeholder='{{item.price}}'>
+          </p>
+          <p>
+            <input type='submit' value='Edit'>
+          </p>
+        </fieldset>
+      </form>
+      <a href='#'>Cancel</a>
+    </main>
   </body>
 </html>

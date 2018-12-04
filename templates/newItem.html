@@ -4,6 +4,28 @@
     <title>Create a new item</title>
   </head>
   <body>
-    <h1>This page will enable new item creation</h1>
+    <h1>This page will enable new item creation for {{category.name}}</h1>
+    <main>
+      <form>
+        <fieldset>
+          <p>
+            <label for='name'>Item Name:</label><br>
+            <input type='text' name='name'>
+          </p>
+          <p>
+            <label for='description'>Item Description:</label><br>
+            <input type='text' name='description'>
+          </p>
+          <p>
+            <label for='name'>Item Price:</label><br>
+            <input type='text' name='price'>
+          </p>
+          <p>
+            <input type='submit' value='Create'>
+          </p>
+        </fieldset>
+      </form>
+      <a href='#'>Cancel</a>
+    </main>
   </body>
 </html>

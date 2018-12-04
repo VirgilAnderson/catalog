@@ -4,7 +4,15 @@
     <title>Catalog</title>
   </head>
   <body>
+    <nav>
+      <a href="#">New Category</a>
+    </nav>
     <h1>This page will show all my categories</h1>
+    <section>
+      {% for c in categories%}
+      <p>{{c.name}}</p>
+      {% endfor %}
+    </section>
 
   </body>
 </html>

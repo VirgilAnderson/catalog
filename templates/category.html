@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Show Category</title>
+    <title>{{category.name}}</title>
   </head>
   <body>
-    <h1>This page will show all the items in a particular category</h1>
+    <h1>{{category.name}}</h1>
+    <p>This page will show all the items in a particular category</p>
+    <main>
+      <section>
+        {% for i in items%}
+        <div>
+          <h3>{{i.name}}</h3>
+          <p>{{i.price}}</p>
+          <p>{{i.description}}</p>
+          <p>
+            <div>
+              <a href='#'>Edit</a>
+            </div>
+            <div>
+              <a href='#'>Delete</a>
+            </div>
+          </p>
+        </div>
+        {% endfor %}
+      </section>
+    </main>
   </body>
 </html>
