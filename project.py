@@ -6,42 +6,42 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/catalog')
 def showCatalog():
-    return "This page will show all my categories"
+    return render_template('catalog.html')
 
 # Create a new category
 @app.route('/category/new')
 def newCategory():
-    return "This page will enable you to add a new item to the category"
+    return render_template('newCategory.html')
 
 # Edit a category
 @app.route('/category/category_id/edit')
 def editCategory():
-    return "This page will allow me to edit a category"
+    return render_template('editCategory.html')
 
 # Delete a category
 @app.route('/category/category_id/delete')
 def deleteCategory():
-    return "This page will enable category deletion"
+    return render_template('deleteCategory.html')
 
 # Show a category
 @app.route('/category/category_id')
 def showCategory():
-    return "This page will show all the items in a particular category"
+    return render_template('category.html')
 
 # Create a new item
 @app.route('/item/category_id/new')
 def newItem():
-    return "This page will enable new item creation"
+    return render_template('newItem.html')
 
 # Edit an item
 @app.route('/item/category_id/item_id/edit')
 def editItem():
-    return "This page will enable item edits"
+    return render_template('editItem.html')
 
 # Delete an item
 @app.route('/item/category_id/item_id/delete')
 def deleteItem():
-    return "This page will enable item deletion"
+    return render_template('deleteItem.html')
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
