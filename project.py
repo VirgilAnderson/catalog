@@ -44,9 +44,14 @@ def deleteCategory():
     return render_template('deleteCategory.html', category = category)
 
 # Show a category
-@app.route('/category/category_id')
-def showCategory():
-    return render_template('category.html', items = items, category = category)
+@app.route('/category/<int:category_id>')
+def showCategory(category_id):
+    category = session.query(magicCategory).filter_by(id = category_id).one()
+    items = session.query(Item).filter_by(category_id = category_id).all()
+    message = ''
+    if not items:
+        message = "Your category doesn't have any items yet"
+    return render_template('category.html', items = items, category = category, message = message)
 
 # Create a new item
 @app.route('/item/category_id/new')

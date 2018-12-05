@@ -4,8 +4,11 @@
     <title>{{category.name}}</title>
   </head>
   <body>
+    <nav>
+      <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
+    </nav>
     <h1>{{category.name}}</h1>
-    <p>This page will show all the items in a particular category</p>
+    <p>{{message}}</p>
     <main>
       <section>
         {% for i in items%}
