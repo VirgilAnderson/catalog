@@ -23,9 +23,15 @@ def showCatalog():
     return render_template('catalog.html', categories = categories, message = message)
 
 # Create a new category
-@app.route('/category/new')
+@app.route('/category/new', methods=['GET', 'POST'])
 def newCategory():
-    return render_template('newCategory.html')
+    if request.method == 'POST':
+        newCategory = magicCategory(name = request.form['name'])
+        session.add(newCategory)
+        session.commit()
+        return redirect(url_for('showCategory', category_id = newCategory.id))
+    else:
+        return render_template('newCategory.html')
 
 # Edit a category
 @app.route('/category/category_id/edit')

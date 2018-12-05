@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Create a new category</title>
+    <title>Create a new magic category</title>
   </head>
   <body>
-    <h1>This page will enable you to add a new item to the category</h1>
+    <header>
+      <h1>Create a new magic category</h1>
+    </header>
     <main>
-      <form>
+      <form action='{{url_for("newCategory")}}' method="POST">
         <fieldset>
           <p>
             <label for='name'>Category Name:</label><br>
@@ -17,7 +19,7 @@
           </p>
         </fieldset>
       </form>
-      <a href='#'>Cancel</a>
+      <a href='{{url_for("showCatalog")}}'>Cancel</a>
     </main>
   </body>
 </html>
