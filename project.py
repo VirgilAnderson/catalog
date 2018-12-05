@@ -15,7 +15,12 @@ session = DBSession()
 @app.route('/')
 @app.route('/catalog')
 def showCatalog():
-    return render_template('catalog.html', categories = categories)
+    # Show all the categories in the catelog
+    categories = session.query(magicCategory).all()
+    message = ''
+    if not categories:
+        message = "You don't have any magic categories..."
+    return render_template('catalog.html', categories = categories, message = message)
 
 # Create a new category
 @app.route('/category/new')
@@ -52,15 +57,6 @@ def editItem():
 def deleteItem():
     return render_template('deleteItem.html', item = item)
 
-
-# Temporary fake database
-#Fake Categories
-category = {'name': 'illusions', 'id': '1'}
-categories = [{'name': 'illusions', 'id': '1'}, {'name': 'closeup', 'id': '2'}]
-
-#Fake Items
-item = {'name': 'ambitious card', 'description': 'card trick', 'price': '$5.00', 'id': '3'}
-items = [{'name': 'ambitious card', 'description': 'card trick', 'price': '$5.00', 'id': '3'}, {'name': 'cups and balls', 'description': 'magic trick', 'price': '$15.00', 'id': '4'}]
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
