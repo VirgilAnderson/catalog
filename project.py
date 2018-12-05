@@ -17,6 +17,8 @@ session = DBSession()
 def showCatalog():
     # Show all the categories in the catelog
     categories = session.query(magicCategory).all()
+
+    # If there are no categories, display a message
     message = ''
     if not categories:
         message = "You don't have any magic categories..."
@@ -48,6 +50,8 @@ def deleteCategory():
 def showCategory(category_id):
     category = session.query(magicCategory).filter_by(id = category_id).one()
     items = session.query(Item).filter_by(category_id = category_id).all()
+
+    # If there are no items in the category, display a message
     message = ''
     if not items:
         message = "Your category doesn't have any items yet"
