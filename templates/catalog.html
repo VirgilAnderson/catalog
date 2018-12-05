@@ -10,9 +10,9 @@
     <h1>This page will show all my categories</h1>
     <section>
       {% for c in categories%}
-      <p>{{c.name}}</p>
+      <p>{{c.name}}<br>
+          {{c.id}}</p>
       {% endfor %}
     </section>
-
   </body>
 </html>
