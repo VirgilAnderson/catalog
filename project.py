@@ -44,7 +44,7 @@ def editCategory(category_id):
             editedCategory.name = request.form['name']
         session.add(editedCategory)
         session.commit()
-        return redirect(url_for('showCategory', category_id = category_id))
+        return redirect(url_for('showCatalog'))
     else:
         return render_template('editCategory.html', category = editedCategory)
 
