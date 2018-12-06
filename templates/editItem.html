@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit an item</title>
+    <title>Edit {{item.name}}</title>
   </head>
   <body>
-    <h1>This page will enable item edits</h1>
     <main>
-      <form>
+      <form action="{{url_for('editItem', item_id = item.id, category_id = category_id)}}" method='POST'>
         <fieldset>
           <p>
             <label for='name'>Item Name:</label><br>
@@ -14,7 +13,9 @@
           </p>
           <p>
             <label for='description'>Item Description:</label><br>
-            <input type='text' name='description' placeholder='{{item.description}}'>
+            <textarea name='description' cols=50 rows=10>
+              {{item.description}}
+            </textarea>
           </p>
           <p>
             <label for='name'>Item Price:</label><br>
@@ -25,7 +26,7 @@
           </p>
         </fieldset>
       </form>
-      <a href='#'>Cancel</a>
+      <a href='{{url_for('showCategory', category_id = category_id)}}'>Cancel</a>
     </main>
   </body>
 </html>
