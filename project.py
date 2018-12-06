@@ -102,9 +102,16 @@ def editItem(category_id, item_id):
         return render_template('editItem.html', item = editedItem, category_id = category_id)
 
 # Delete an item
-@app.route('/item/category_id/item_id/delete')
-def deleteItem():
-    return render_template('deleteItem.html', item = item)
+@app.route('/item/<int:category_id>/<int:item_id>/delete', methods=['GET', 'POST'])
+def deleteItem(category_id, item_id):
+    category = session.query(magicCategory).filter_by(id = category_id).one()
+    deletionItem = session.query(Item).filter_by(id = item_id).one()
+    if request.method == 'POST':
+        session.delete(deletionItem)
+        session.commit()
+        return redirect(url_for('showCategory', category_id = category.id))
+    else:
+        return render_template('deleteItem.html', item = deletionItem, category_id = category.id)
 
 
 if __name__ == '__main__':

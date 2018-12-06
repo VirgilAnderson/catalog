@@ -4,9 +4,8 @@
     <title>Delete Item</title>
   </head>
   <body>
-    <h1>This page will enable item deletion</h1>
     <main>
-      <form>
+      <form action="{{url_for('deleteItem', category_id = category_id, item_id = item.id)}}" method="post">
         <fieldset>
           <p>
             <label for='delete'>Are you sure you want to delete {{item.name}}?</label>
@@ -16,7 +15,7 @@
           </p>
         </fieldset>
       </form>
-      <a href='#'>Cancel</a>
+      <a href='{{url_for('showCategory', category_id = category_id)}}'>Cancel</a>
     </main>
   </body>
 </html>
