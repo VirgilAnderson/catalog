@@ -6,6 +6,7 @@
   <body>
     <nav>
       <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
+      <a href="{{url_for('showCatalog')}}">Home</a>
     </nav>
     <h1>{{category.name}}</h1>
     <p>{{message}}</p>

@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>This page will allow me to edit a category</h1>
-    <form>
+    <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
       <fieldset>
         <p>
           <label for='name'>Category Name:</label><br>
