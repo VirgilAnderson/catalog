@@ -15,14 +15,14 @@
         {% for i in items%}
         <div>
           <h3>{{i.name}}</h3>
-          <p>{{i.price}}</p>
           <p>{{i.description}}</p>
+          <p>{{i.price}}</p>
           <p>
             <div>
-              <a href='#'>Edit</a>
+              <a href='{{url_for('editItem', category_id = category.id, item_id = i.id)}}'>Edit</a>
             </div>
             <div>
-              <a href='#'>Delete</a>
+              <a href='{{url_for('deleteItem', category_id = category.id, item_id = i.id)}}'>Delete</a>
             </div>
           </p>
         </div>

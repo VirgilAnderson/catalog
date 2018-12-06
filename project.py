@@ -72,9 +72,16 @@ def showCategory(category_id):
     return render_template('category.html', items = items, category = category, message = message)
 
 # Create a new item
-@app.route('/item/category_id/new')
-def newItem():
-    return render_template('newItem.html', category = category)
+@app.route('/item/<int:category_id>/new', methods=['GET', 'POST'])
+def newItem(category_id):
+    category = session.query(magicCategory).filter_by(id = category_id).one()
+    if request.method == 'POST':
+        newItem = Item(name = request.form['name'], price = request.form['price'], description = request.form['description'], category_id = category_id)
+        session.add(newItem)
+        session.commit()
+        return redirect(url_for('showCategory', category_id = category_id))
+    else:
+        return render_template('newItem.html', category = category)
 
 # Edit an item
 @app.route('/item/category_id/item_id/edit')
