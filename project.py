@@ -49,9 +49,15 @@ def editCategory(category_id):
         return render_template('editCategory.html', category = editedCategory)
 
 # Delete a category
-@app.route('/category/category_id/delete')
-def deleteCategory():
-    return render_template('deleteCategory.html', category = category)
+@app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
+def deleteCategory(category_id):
+    deletionCategory = session.query(magicCategory).filter_by(id = category_id).one()
+    if request.method == 'POST':
+        session.delete(deletionCategory)
+        session.commit()
+        return redirect(url_for('showCatalog'))
+    else:
+        return render_template('deleteCategory.html', category = deletionCategory)
 
 # Show a category
 @app.route('/category/<int:category_id>')

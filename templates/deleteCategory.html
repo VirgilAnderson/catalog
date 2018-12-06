@@ -6,7 +6,7 @@
   <body>
     <h1>This page will enable category deletion</h1>
     <main>
-      <form>
+      <form action='{{url_for('deleteCategory', category_id = category.id)}}' method="POST">
         <fieldset>
           <p>
             <label for='delete'>Are you sure you want to delete {{category.name}}?</label>
@@ -16,7 +16,7 @@
           </p>
         </fieldset>
       </form>
-      <a href='#'>Cancel</a>
+      <a href='{{url_for('showCatalog')}}'>Cancel</a>
     </main>
   </body>
 </html>
