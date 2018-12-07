@@ -113,6 +113,19 @@ def deleteItem(category_id, item_id):
     else:
         return render_template('deleteItem.html', item = deletionItem, category_id = category.id)
 
+# Catalog API Endpoint
+@app.route('/catalog/JSON')
+def catalogJSON():
+    categories = session.query(magicCategory).all()
+    return jsonify(magicCategory=[i.serialize for i in categories])
+
+# Category API Endpoint
+@app.route('/category/<int:category_id>/JSON')
+def categoryJSON(category_id):
+    category = session.query(magicCategory).filter_by(id = category_id).one()
+    items = session.query(Item).filter_by(category_id = category_id).all()
+    return jsonify(Item=[i.serialize for i in items])
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
