@@ -30,6 +30,7 @@ def newCategory():
     if request.method == 'POST':
         newCategory = magicCategory(name = request.form['name'])
         session.add(newCategory)
+        flash('New Category %s Successfully Created' % newCategory.name)
         session.commit()
         return redirect(url_for('showCategory', category_id = newCategory.id))
     else:
@@ -43,6 +44,7 @@ def editCategory(category_id):
         if request.form['name']:
             editedCategory.name = request.form['name']
         session.add(editedCategory)
+        flash('%s Successfully Edited' % editedCategory.name)
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
@@ -54,6 +56,7 @@ def deleteCategory(category_id):
     deletionCategory = session.query(magicCategory).filter_by(id = category_id).one()
     if request.method == 'POST':
         session.delete(deletionCategory)
+        flash('%s Successfully Deleted' % deletionCategory.name)
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
@@ -78,6 +81,7 @@ def newItem(category_id):
     if request.method == 'POST':
         newItem = Item(name = request.form['name'], price = request.form['price'], description = request.form['description'], category_id = category_id)
         session.add(newItem)
+        flash('%s Successfully Created' % newItem.name)
         session.commit()
         return redirect(url_for('showCategory', category_id = category_id))
     else:
@@ -96,6 +100,7 @@ def editItem(category_id, item_id):
         if request.form['price']:
             editedItem.price = request.form['price']
         session.add(editedItem)
+        flash('%s Successfully Edited' % editedItem.name)
         session.commit()
         return redirect(url_for('showCategory', category_id = category_id))
     else:
@@ -108,6 +113,7 @@ def deleteItem(category_id, item_id):
     deletionItem = session.query(Item).filter_by(id = item_id).one()
     if request.method == 'POST':
         session.delete(deletionItem)
+        flash('%s Successfully Deleted' % deletionItem.name)
         session.commit()
         return redirect(url_for('showCategory', category_id = category.id))
     else:

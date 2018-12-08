@@ -8,6 +8,19 @@
       <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
       <a href="{{url_for('showCatalog')}}">Home</a>
     </nav>
+
+    <div class = 'flash'>
+		    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li><strong> {{ message }} </strong></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
     <h1>{{category.name}}</h1>
     <p>{{message}}</p>
     <main>
