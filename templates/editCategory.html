@@ -2,7 +2,6 @@
 {% block content %}
 {% include "header.html" %}
 
-  <body>
     <h1>Edit {{category.name}}</h1>
     <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
       <fieldset>
@@ -16,4 +15,5 @@
       </fieldset>
     </form>
     <a href='{{url_for('showCatalog')}}'>Cancel</a>
+    {% include "footer.html" %}
   {% endblock %}
