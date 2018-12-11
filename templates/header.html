@@ -1,7 +1,7 @@
-<div>
+<header>
   {%if 'username' not in session %}
   <a href="{{url_for('showLogin')}}">Click Here to Login </a>
   {% else %}
   <a href="{{url_for('gdisconnect')}}">Logout </a>
   {% endif %}
-</div>
+</header>
