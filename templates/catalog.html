@@ -1,49 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Catalog</title>
-  </head>
-  <body>
-    <div class="col-md-6 text-right">
-					{%if 'username' not in session %}
-			<a href="{{url_for('showLogin')}}">Click Here to Login </a>
-			{% else %}
-			<a href="{{url_for('gdisconnect')}}">Logout </a>
-			{% endif %}
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 
-	  </div>
-    <nav>
-      <a href="{{url_for('newCategory')}}">New Category</a>
-    </nav>
+<nav>
+  <a href="{{url_for('newCategory')}}">New Category</a>
+</nav>
 
-    <div class = 'flash'>
-		    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-          {% for message in messages %}
-          <li><strong> {{ message }} </strong></li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    </div>
-
-    <h1>Hocus Pocus Magic Catalog</h1>
-    <p>{{message}}</p>
-    <section>
-      {% for c in categories%}
-      <p>
-        <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-      </p>
-      <p>
-        <div>
-          <a href='{{url_for('editCategory', category_id = c.id)}}'>Edit</a>
-        </div>
-        <div>
-          <a href='{{url_for('deleteCategory', category_id = c.id)}}'>Delete</a>
-        </div>
-      </p>
+<div class = 'flash'>
+		  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li><strong> {{ message }} </strong></li>
       {% endfor %}
-    </section>
-  </body>
-</html>
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+<h1>Hocus Pocus Magic Catalog</h1>
+<p>{{message}}</p>
+<section>
+  {% for c in categories%}
+  <p>
+    <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
+  </p>
+  <p>
+    <div>
+      <a href='{{url_for('editCategory', category_id = c.id)}}'>Edit</a>
+    </div>
+    <div>
+      <a href='{{url_for('deleteCategory', category_id = c.id)}}'>Delete</a>
+    </div>
+  </p>
+  {% endfor %}
+{% endblock %}

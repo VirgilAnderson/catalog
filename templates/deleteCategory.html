@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Delete Category</title>
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
     <main>
       <form action='{{url_for('deleteCategory', category_id = category.id)}}' method="POST">
         <fieldset>
@@ -17,5 +14,4 @@
       </form>
       <a href='{{url_for('showCatalog')}}'>Cancel</a>
     </main>
-  </body>
-</html>
+{% endblock %}

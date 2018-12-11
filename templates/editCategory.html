@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Edit Category</title>
-  </head>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
   <body>
-    <h1>This page will allow me to edit a category</h1>
+    <h1>Edit {{category.name}}</h1>
     <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
       <fieldset>
         <p>
@@ -17,5 +16,4 @@
       </fieldset>
     </form>
     <a href='{{url_for('showCatalog')}}'>Cancel</a>
-  </body>
-</html>
+  {% endblock %}

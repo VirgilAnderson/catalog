@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{category.name}}</title>
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
     <nav>
       <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
       <a href="{{url_for('showCatalog')}}">Home</a>
@@ -43,5 +40,4 @@
         {% endfor %}
       </section>
     </main>
-  </body>
-</html>
+{% endblock %}

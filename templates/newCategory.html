@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create a new magic category</title>
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
     <header>
       <h1>Create a new magic category</h1>
     </header>
@@ -21,5 +18,4 @@
       </form>
       <a href='{{url_for("showCatalog")}}'>Cancel</a>
     </main>
-  </body>
-</html>
+  {% endblock %}

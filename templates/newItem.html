@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create a new item</title>
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
     <h1>This page will enable new item creation for {{category.name}}</h1>
     <main>
       <form action='{{url_for('newItem', category_id = category.id)}}' method='POST'>
@@ -27,5 +25,4 @@
       </form>
       <a href='{{url_for('showCategory', category_id = category.id)}}'>Cancel</a>
     </main>
-  </body>
-</html>
+{% endblock %}

@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Catalog</title>
-  </head>
-  <body>
-    <div class="col-md-6 text-right">
-					{%if 'username' not in session %}
-			<a href="{{url_for('showLogin')}}">Click Here to Login </a>
-			{% else %}
-			<a href="{{url_for('gdisconnect')}}">Logout </a>
-			{% endif %}
-
-	  </div>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 
     <div class = 'flash'>
 		    {% with messages = get_flashed_messages() %}
@@ -33,6 +22,4 @@
         <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
       </p>
       {% endfor %}
-    </section>
-  </body>
-</html>
+    {% endblock %}
