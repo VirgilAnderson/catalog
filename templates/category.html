@@ -1,10 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-    <nav>
-      <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
-      <a href="{{url_for('showCatalog')}}">Home</a>
-    </nav>
+{% include "navigation.html" %}
 
     <div class = 'flash'>
 		    {% with messages = get_flashed_messages() %}
@@ -20,6 +17,9 @@
 
     <h1>{{category.name}}</h1>
     <p>{{message}}</p>
+    <nav>
+      <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
+    </nav>
     <main>
       <section>
         {% for i in items%}

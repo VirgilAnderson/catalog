@@ -1,11 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-
-    <nav>
-      <a href="{{url_for('showCatalog')}}">Home</a>
-    </nav>
-
+{% include "navigation.html" %}
+    
     <div class = 'flash'>
 		    {% with messages = get_flashed_messages() %}
         {% if messages %}

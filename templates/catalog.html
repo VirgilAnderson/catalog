@@ -2,9 +2,7 @@
 {% block content %}
 {% include "header.html" %}
 
-<nav>
-  <a href="{{url_for('newCategory')}}">New Category</a>
-</nav>
+
 
 <div class = 'flash'>
 		  {% with messages = get_flashed_messages() %}
@@ -19,6 +17,9 @@
 </div>
 <h1>Hocus Pocus Magic Catalog</h1>
 <p>{{message}}</p>
+<nav>
+  <a href="{{url_for('newCategory')}}">New Category</a>
+</nav>
 <section>
   {% for c in categories%}
   <p>

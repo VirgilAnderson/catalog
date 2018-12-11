@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-
+{% include "navigation.html" %}
     <h1>This page will enable new item creation for {{category.name}}</h1>
     <main>
       <form action='{{url_for('newItem', category_id = category.id)}}' method='POST'>
