@@ -7,6 +7,14 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+class User(Base):
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    picture = Column(String(250))
+
 
 class magicCategory(Base):
 
@@ -14,6 +22,8 @@ class magicCategory(Base):
 
     id = Column(Integer, primary_key = True)
     name = Column(String(80), nullable = False)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -32,6 +42,8 @@ class Item(Base):
     price = Column(String(8))
     category_id = Column(Integer, ForeignKey('magicCategory.id'))
     category = relationship(magicCategory)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -42,5 +54,5 @@ class Item(Base):
         'description' : self.description,
         }
 
-engine = create_engine('sqlite:///magicCatalog.db')
+engine = create_engine('sqlite:///magicCatalogUsers.db')
 Base.metadata.create_all(engine)
