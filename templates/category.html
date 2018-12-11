@@ -30,6 +30,7 @@
           <h3>{{i.name}}</h3>
           <p>{{i.description}}</p>
           <p>{{i.price}}</p>
+          <p>Owner: {{creator.name}}</p>
           <p>
             <div>
               <a href='{{url_for('editItem', category_id = category.id, item_id = i.id)}}'>Edit</a>
