@@ -190,11 +190,15 @@ def showCatalog():
     if not categories:
         message = "There are no magic categories..."
 
+
+
     # Check to see if user logged in
     if 'username' not in login_session:
         return render_template('publicCatalog.html', categories = categories, message = message, title = title)
     else:
-        return render_template('catalog.html', categories = categories, message = message, title = title)
+        # add user picture
+        picture = login_session['picture']
+        return render_template('catalog.html', categories = categories, message = message, title = title, picture = picture)
 
 # Create a new category
 @app.route('/category/new', methods=['GET', 'POST'])
@@ -206,6 +210,9 @@ def newCategory():
     # Set page title
     title = 'New Magic Category'
 
+    # add user picture
+    picture = login_session['picture']
+
     if request.method == 'POST':
         newCategory = magicCategory(name = request.form['name'], user_id=login_session['user_id'])
         session.add(newCategory)
@@ -213,7 +220,7 @@ def newCategory():
         session.commit()
         return redirect(url_for('showCategory', category_id = newCategory.id))
     else:
-        return render_template('newCategory.html', title = title)
+        return render_template('newCategory.html', title = title, picture = picture)
 
 # Edit a category
 @app.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
@@ -222,6 +229,9 @@ def editCategory(category_id):
 
     # Set page title
     title = ('Edit %s' % editedCategory.name)
+
+    # add user picture
+    picture = login_session['picture']
 
     #Check to see if user is logged if user is logged in
     if 'username' not in login_session:
@@ -239,7 +249,7 @@ def editCategory(category_id):
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
-        return render_template('editCategory.html', category = editedCategory, title = title)
+        return render_template('editCategory.html', category = editedCategory, title = title, picture = picture)
 
 # Delete a category
 @app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
@@ -248,6 +258,9 @@ def deleteCategory(category_id):
 
     # Set page title
     title = ('Delete %s' % deletionCategory.name)
+
+    # add user picture
+    picture = login_session['picture']
 
     #Check to see if user is logged if user is logged in
     if 'username' not in login_session:
@@ -263,7 +276,7 @@ def deleteCategory(category_id):
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
-        return render_template('deleteCategory.html', category = deletionCategory, title = title)
+        return render_template('deleteCategory.html', category = deletionCategory, title = title, picture = picture)
 
 # Show a category
 @app.route('/category/<int:category_id>')
@@ -275,6 +288,8 @@ def showCategory(category_id):
     # Set page title
     title = ('%s' % category.name)
 
+
+
     # If there are no items in the category, display a message
     message = ''
     if not items:
@@ -284,7 +299,9 @@ def showCategory(category_id):
     if 'username' not in login_session or creator.id != login_session['user_id']:
         return render_template('publicCategory.html', items = items, category = category, message = message, creator=creator, title = title)
     else:
-        return render_template('category.html', items = items, category = category, message = message, creator=creator, title = title)
+        # add user picture
+        picture = login_session['picture']
+        return render_template('category.html', items = items, category = category, message = message, creator=creator, title = title, picture = picture)
 
 # Create a new item
 @app.route('/item/<int:category_id>/new', methods=['GET', 'POST'])
@@ -293,6 +310,9 @@ def newItem(category_id):
 
     # Set page title
     title = ('New Magic Item')
+
+    # add user picture
+    picture = login_session['picture']
 
     #Check to see if user is logged if user is logged in
     if 'username' not in login_session:
@@ -309,7 +329,7 @@ def newItem(category_id):
         session.commit()
         return redirect(url_for('showCategory', category_id = category_id))
     else:
-        return render_template('newItem.html', category = category, title = title)
+        return render_template('newItem.html', category = category, title = title, picture = picture)
 
 # Edit an item
 @app.route('/item/<int:category_id>/<int:item_id>/edit', methods=['GET', 'POST'])
@@ -319,6 +339,9 @@ def editItem(category_id, item_id):
 
     # Set page title
     title = ('Edit %s' % editedItem.name)
+
+    # add user picture
+    picture = login_session['picture']
 
     #Check to see if user is logged if user is logged in
     if 'username' not in login_session:
@@ -340,7 +363,7 @@ def editItem(category_id, item_id):
         session.commit()
         return redirect(url_for('showCategory', category_id = category_id))
     else:
-        return render_template('editItem.html', item = editedItem, category_id = category_id, title = title)
+        return render_template('editItem.html', item = editedItem, category_id = category_id, title = title, picture = picture)
 
 # Delete an item
 @app.route('/item/<int:category_id>/<int:item_id>/delete', methods=['GET', 'POST'])
@@ -350,6 +373,9 @@ def deleteItem(category_id, item_id):
 
     # Set page title
     title = ('Delete %s' % deletionItem.name)
+
+    # add user picture
+    picture = login_session['picture']
 
     #Check to see if user is logged if user is logged in
     if 'username' not in login_session:
@@ -365,7 +391,7 @@ def deleteItem(category_id, item_id):
         session.commit()
         return redirect(url_for('showCategory', category_id = category.id))
     else:
-        return render_template('deleteItem.html', item = deletionItem, category_id = category.id, title = title)
+        return render_template('deleteItem.html', item = deletionItem, category_id = category.id, title = title, picture = picture)
 
 # Catalog API Endpoint
 @app.route('/catalog/JSON')

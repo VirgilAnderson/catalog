@@ -45,6 +45,13 @@ header{
   align-items: center;
   flex-wrap: wrap;
 }
+.userPic{
+  margin-right: 5%;
+
+}
+.userPic img{
+  border-radius: 50%;
+}
 
 /* navigation */
 
