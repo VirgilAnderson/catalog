@@ -69,8 +69,8 @@ main{
 }
 .category{
   width: 30%;
-  margin: 1%;
-  padding: 1%;
+  margin: 1% 0;
+  padding: 1% 2%;
   background-color: #534E64;
   opacity: .95;
 }
@@ -82,8 +82,8 @@ main{
 }
 .item{
   width: 75%;
-  margin: 1%;
-  padding: 1%;
+  margin: 1% 0;
+  padding: 1% 2%;
   background-color: #534E64;
   opacity: .95;
 }
@@ -92,6 +92,13 @@ main{
 }
 .item a:hover{
   color: #18132B;
+}
+fieldset{
+  width: 75%;
+  margin: 1% 0;
+  padding: 1% 2%;
+  background-color: #534E64;
+  opacity: .95;
 }
 footer{
   width: 90%;
