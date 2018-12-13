@@ -1,3 +1,9 @@
+# !/usr/bin/env python3
+
+# Magic Catalog Project
+# By Virgil Anderson
+# December 13, 2018
+
 from flask import Flask, render_template, request
 from flask import redirect, url_for, flash, jsonify
 from sqlalchemy import create_engine
