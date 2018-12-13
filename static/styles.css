@@ -40,6 +40,18 @@ main{
   margin: 0;
   padding: 0 5%;
 }
+nav{
+  width: 90%;
+  margin: 0 0 1% 0;
+  padding: 1% 5%;
+  background-color: #221D31;
+}
+nav a{
+  color: white;
+}
+nav a:hover{
+  color: #716C82;
+}
 
 
 /*
