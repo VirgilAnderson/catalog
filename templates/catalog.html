@@ -18,19 +18,21 @@
 	<div>
 	  <a href="{{url_for('newCategory')}}">New Category</a>
 	</div>
-	<section>
+	<section class='flex-box'>
 	  {% for c in categories%}
-	  <h2>
-	    <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-	  </h2>
-	  <p>
-	    <div>
-	      <a href='{{url_for('editCategory', category_id = c.id)}}'>Edit</a>
-	    </div>
-	    <div>
-	      <a href='{{url_for('deleteCategory', category_id = c.id)}}'>Delete</a>
-	    </div>
-	  </p>
+	  <div class='category'>
+			<h2>
+		    <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
+		  </h2>
+		  <p>
+		    <div>
+		      <a href='{{url_for('editCategory', category_id = c.id)}}'>Edit</a>
+		    </div>
+		    <div>
+		      <a href='{{url_for('deleteCategory', category_id = c.id)}}'>Delete</a>
+		    </div>
+		  </p>
+		</div>
 	  {% endfor %}
 	</section>
 </main>

@@ -59,13 +59,26 @@ main{
   width: 90%;
   margin: 0;
   padding: 0 5%;
-  min-height: 475px;
+  min-height: 500px;
 }
 .flex-box {
   display: flex;
   flex-direction: column;
   align-items: left;
   flex-wrap: wrap;
+}
+.category{
+  width: 30%;
+  margin: 1%;
+  padding: 1%;
+  background-color: #534E64;
+  opacity: .95;
+}
+.category a{
+  color: white;
+}
+.category a:hover{
+  color: #18132B;
 }
 .item{
   width: 75%;
@@ -76,6 +89,9 @@ main{
 }
 .item a{
   color: white;
+}
+.item a:hover{
+  color: #18132B;
 }
 footer{
   width: 90%;

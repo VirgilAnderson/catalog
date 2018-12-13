@@ -14,11 +14,13 @@
       {% endwith %}
   </div>
   <p>{{message}}</p>
-  <section>
+  <section class='flex-box'>
     {% for c in categories%}
-    <h2>
-      <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-    </h2>
+    <div class='category'>
+      <h2>
+        <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
+      </h2>
+    </div>
     {% endfor %}
   </section>
 </main>
