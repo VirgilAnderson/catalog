@@ -4,10 +4,11 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     background-color: #363242;
-    background-image: url(magic-background.jpg);
+    background-image: url(background.jpg);
     background-position: center;
     background-repeat: none;
     background-attachment: fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
     color: white;
