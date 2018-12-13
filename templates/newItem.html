@@ -3,7 +3,7 @@
 {% include "header.html" %}
 {% include "navigation.html" %}
 <main>
-  <h1>This page will enable new item creation for {{category.name}}</h1>
+  <h1>New item for {{category.name}}</h1>
   <form action='{{url_for('newItem', category_id = category.id)}}' method='POST'>
     <fieldset>
       <p>

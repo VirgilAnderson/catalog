@@ -4,6 +4,7 @@
 {% include "navigation.html" %}
 <main>
   <form action="{{url_for('editItem', item_id = item.id, category_id = category_id)}}" method='POST'>
+    <h1>Edit {{item.name}}</h1>
     <fieldset>
       <p>
         <label for='name'>Item Name:</label><br>

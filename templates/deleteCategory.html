@@ -4,6 +4,7 @@
 {% include "navigation.html" %}
 <main>
   <form action='{{url_for('deleteCategory', category_id = category.id)}}' method="POST">
+    <h1>Delete {{category.name}}</h1>
     <fieldset>
       <p>
         <label for='delete'>Are you sure you want to delete {{category.name}}?</label>
