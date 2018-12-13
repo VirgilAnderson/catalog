@@ -17,6 +17,8 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Times New Roman", Times, serif;
     color: white;
 }
+
+/* Header Section */
 header{
   margin: 0;
   padding: 1% 2%;
@@ -34,13 +36,10 @@ header{
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
-main{
-  width: 90%;
-  margin: 0;
-  padding: 0 5%;
-  min-height: 450px;
-}
+
+/* navigation */
 nav{
   width: 90%;
   margin: 0 0 1% 0;
@@ -52,6 +51,31 @@ nav a{
 }
 nav a:hover{
   color: #716C82;
+}
+
+/* body */
+
+main{
+  width: 90%;
+  margin: 0;
+  padding: 0 5%;
+  min-height: 475px;
+}
+.flex-box {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  flex-wrap: wrap;
+}
+.item{
+  width: 75%;
+  margin: 1%;
+  padding: 1%;
+  background-color: #534E64;
+  opacity: .95;
+}
+.item a{
+  color: white;
 }
 footer{
   width: 90%;

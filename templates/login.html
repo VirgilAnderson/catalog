@@ -15,20 +15,21 @@
       </div>
     </header>
     {% include "navigation.html" %}
-    <div id="signinButton">
-      <span class="g-signin"
-        data-scope="openid email"
-        data-clientid="237388413324-5o8s7s237csuaof8981onub4ilfa9j2o.apps.googleusercontent.com"
-        data-redirecturi="postmessage"
-        data-accesstype="offline"
-        data-cookiepolicy="single_host_origin"
-        data-callback="signInCallback"
-        data-approvalprompt="force">
-      </span>
-    </div>
+    <main>
+      <div id="signinButton">
+        <span class="g-signin"
+          data-scope="openid email"
+          data-clientid="237388413324-5o8s7s237csuaof8981onub4ilfa9j2o.apps.googleusercontent.com"
+          data-redirecturi="postmessage"
+          data-accesstype="offline"
+          data-cookiepolicy="single_host_origin"
+          data-callback="signInCallback"
+          data-approvalprompt="force">
+        </span>
+      </div>
 
-    <div id="result"></div>
-
+      <div id="result"></div>
+    </main>
     <script>
 function signInCallback(authResult) {
   if (authResult['code']) {
