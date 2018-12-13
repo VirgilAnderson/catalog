@@ -2,18 +2,20 @@
 {% block content %}
 {% include "header.html" %}
 {% include "navigation.html" %}
-    <h1>Edit {{category.name}}</h1>
-    <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
-      <fieldset>
-        <p>
-          <label for='name'>Category Name:</label><br>
-          <input type='text' name='name' placeholder='{{category.name}}'>
-        </p>
-        <p>
-          <input type='submit' value='Edit'>
-        </p>
-      </fieldset>
-    </form>
-    <a href='{{url_for('showCatalog')}}'>Cancel</a>
-    {% include "footer.html" %}
-  {% endblock %}
+<main>
+  <h1>Edit {{category.name}}</h1>
+  <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
+    <fieldset>
+      <p>
+        <label for='name'>Category Name:</label><br>
+        <input type='text' name='name' placeholder='{{category.name}}'>
+      </p>
+      <p>
+        <input type='submit' value='Edit'>
+      </p>
+    </fieldset>
+  </form>
+  <a href='{{url_for('showCatalog')}}'>Cancel</a>
+</main>
+{% include "footer.html" %}
+{% endblock %}

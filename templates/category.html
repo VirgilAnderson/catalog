@@ -3,42 +3,41 @@
 {% include "header.html" %}
 {% include "navigation.html" %}
 
-    <div class = 'flash'>
-		    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-          {% for message in messages %}
-          <li><strong> {{ message }} </strong></li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    </div>
-
-    <h1>{{category.name}}</h1>
-    <p>{{message}}</p>
-    <nav>
-      <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
-    </nav>
-    <main>
-      <section>
-        {% for i in items%}
-        <div>
-          <h3>{{i.name}}</h3>
-          <p>{{i.description}}</p>
-          <p>{{i.price}}</p>
-          <p>Owner: {{creator.name}}</p>
-          <p>
-            <div>
-              <a href='{{url_for('editItem', category_id = category.id, item_id = i.id)}}'>Edit</a>
-            </div>
-            <div>
-              <a href='{{url_for('deleteItem', category_id = category.id, item_id = i.id)}}'>Delete</a>
-            </div>
-          </p>
-        </div>
+<main>
+  <div class = 'flash'>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li><strong> {{ message }} </strong></li>
         {% endfor %}
-      </section>
-    </main>
-    {% include "footer.html" %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+  </div>
+  <h1>{{category.name}}</h1>
+  <p>{{message}}</p>
+  <nav>
+    <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
+  </nav>
+  <section>
+    {% for i in items%}
+    <div>
+      <h3>{{i.name}}</h3>
+      <p>{{i.description}}</p>
+      <p>{{i.price}}</p>
+      <p>Owner: {{creator.name}}</p>
+      <p>
+        <div>
+          <a href='{{url_for('editItem', category_id = category.id, item_id = i.id)}}'>Edit</a>
+        </div>
+        <div>
+          <a href='{{url_for('deleteItem', category_id = category.id, item_id = i.id)}}'>Delete</a>
+        </div>
+      </p>
+    </div>
+    {% endfor %}
+  </section>
+</main>
+{% include "footer.html" %}
 {% endblock %}

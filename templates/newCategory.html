@@ -2,19 +2,19 @@
 {% block content %}
 {% include "header.html" %}
 {% include "navigation.html" %}
-    <main>
-      <form action='{{url_for("newCategory")}}' method="POST">
-        <fieldset>
-          <p>
-            <label for='name'>Category Name:</label><br>
-            <input type='text' name='name'>
-          </p>
-          <p>
-            <input type='submit' value='Create'>
-          </p>
-        </fieldset>
-      </form>
-      <a href='{{url_for("showCatalog")}}'>Cancel</a>
-    </main>
-    {% include "footer.html" %}
-  {% endblock %}
+<main>
+  <form action='{{url_for("newCategory")}}' method="POST">
+    <fieldset>
+      <p>
+        <label for='name'>Category Name:</label><br>
+        <input type='text' name='name'>
+      </p>
+      <p>
+        <input type='submit' value='Create'>
+      </p>
+    </fieldset>
+  </form>
+  <a href='{{url_for("showCatalog")}}'>Cancel</a>
+</main>
+{% include "footer.html" %}
+{% endblock %}

@@ -2,28 +2,28 @@
 {% block content %}
 {% include "header.html" %}
 {% include "navigation.html" %}
-    <h1>This page will enable new item creation for {{category.name}}</h1>
-    <main>
-      <form action='{{url_for('newItem', category_id = category.id)}}' method='POST'>
-        <fieldset>
-          <p>
-            <label for='name'>Item Name:</label><br>
-            <input type='text' name='name'>
-          </p>
-          <p>
-            <label for='description'>Item Description:</label><br>
-            <textarea cols='50' rows='10' name='description'></textarea>
-          </p>
-          <p>
-            <label for='name'>Item Price:</label><br>
-            <input type='text' name='price'>
-          </p>
-          <p>
-            <input type='submit' value='Create'>
-          </p>
-        </fieldset>
-      </form>
-      <a href='{{url_for('showCategory', category_id = category.id)}}'>Cancel</a>
-    </main>
-    {% include "footer.html" %}
+<main>
+  <h1>This page will enable new item creation for {{category.name}}</h1>
+  <form action='{{url_for('newItem', category_id = category.id)}}' method='POST'>
+    <fieldset>
+      <p>
+        <label for='name'>Item Name:</label><br>
+        <input type='text' name='name'>
+      </p>
+      <p>
+        <label for='description'>Item Description:</label><br>
+        <textarea cols='50' rows='10' name='description'></textarea>
+      </p>
+      <p>
+        <label for='name'>Item Price:</label><br>
+        <input type='text' name='price'>
+      </p>
+      <p>
+        <input type='submit' value='Create'>
+      </p>
+    </fieldset>
+  </form>
+  <a href='{{url_for('showCategory', category_id = category.id)}}'>Cancel</a>
+</main>
+{% include "footer.html" %}
 {% endblock %}
