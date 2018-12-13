@@ -3,15 +3,14 @@
 {% include "header.html" %}
 {% include "navigation.html" %}
 <main>
-  <h1>Edit {{category.name}}</h1>
-  <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
+  <form action='{{url_for('deleteCategory', cat_id = category.id)}}' method="POST">
+    <h1>Delete {{category.name}}</h1>
     <fieldset>
       <p>
-        <label for='name'>Category Name:</label><br>
-        <input type='text' name='name' placeholder='{{category.name}}'>
+        <label for='delete'>Are you sure you want to delete {{category.name}}?</label>
       </p>
       <p>
-        <input type='submit' value='Edit'>
+        <input type='submit' value='Delete'>
       </p>
     </fieldset>
   </form>

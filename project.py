@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request
+from flask import redirect, url_for, flash, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, magicCategory, Item, User
@@ -19,8 +20,9 @@ CLIENT_ID = json.loads(
 
 engine = create_engine('sqlite:///magicCatalogUsers.db')
 Base.metadata.bind = engine
-DBSession = sessionmaker(bind = engine)
+DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
 
 # Routes
 # Create anti-forgery state token
@@ -31,6 +33,8 @@ def showLogin():
     login_session['state'] = state
     return render_template('login.html', STATE=state)
 
+
+# Google Login
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -83,8 +87,7 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(json.dumps('User already connected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -115,14 +118,15 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px; height: 300px;'
+    output += 'border-radius: 150px; -webkit-border-radius: 150px;'
+    output += '-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
 
+
 # User Helper Functions
-
-
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
@@ -138,26 +142,24 @@ def getUserInfo(user_id):
 
 
 def getUserID(email):
-    try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
-        return None
+
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
-
 @app.route('/gdisconnect')
 def gdisconnect():
     access_token = login_session.get('access_token')
     if access_token is None:
         print 'Access Token is None'
-        response = make_response(json.dumps('Current user not connected.'), 401)
+        response = make_response(json.dumps('User not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
     print 'In gdisconnect access token is %s' % access_token
     print 'User name is: '
     print login_session['username']
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token='
+    url += '%s' % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -172,226 +174,262 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     else:
-        response = make_response(json.dumps('Failed to revoke token for given user.', 400))
+        response = make_response(json.dumps('Failed to revoke token.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
 
 
-# Show catalog
+# Show Catalog
 @app.route('/')
 @app.route('/catalog')
 def showCatalog():
     # Show all the categories in the catelog
-    categories = session.query(magicCategory).all()
+    c = session.query(magicCategory).all()
     # Set page title
-    title = 'Magic Catalog'
+    t = 'Magic Catalog'
     # If there are no categories, display a message
-    message = ''
-    if not categories:
-        message = "There are no magic categories..."
-
-
+    m = ''
+    if not c:
+        m = "There are no magic categories..."
 
     # Check to see if user logged in
     if 'username' not in login_session:
-        return render_template('publicCatalog.html', categories = categories, message = message, title = title)
+        return render_template('publicCatalog.html', c=c, message=m, t=t)
     else:
         # add user picture
-        picture = login_session['picture']
-        return render_template('catalog.html', categories = categories, message = message, title = title, picture = picture)
+        p = login_session['picture']
+        return render_template('catalog.html', c=c, message=m, t=t, p=p)
+
 
 # Create a new category
 @app.route('/category/new', methods=['GET', 'POST'])
 def newCategory():
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Set page title
-    title = 'New Magic Category'
+    t = 'New Magic Category'
 
     # add user picture
-    picture = login_session['picture']
+    p = login_session['picture']
 
+    id = login_session['user_id']
     if request.method == 'POST':
-        newCategory = magicCategory(name = request.form['name'], user_id=login_session['user_id'])
-        session.add(newCategory)
-        flash('New Category %s Successfully Created' % newCategory.name)
+        nCat = magicCategory(name=request.form['name'], user_id=id)
+        session.add(nCat)
+        flash('New Category %s Successfully Created' % nCat.name)
         session.commit()
-        return redirect(url_for('showCategory', category_id = newCategory.id))
+        return redirect(url_for('showCategory', cat_id=nCat.id))
     else:
-        return render_template('newCategory.html', title = title, picture = picture)
+        return render_template('newCategory.html', t=t, p=p)
+
 
 # Edit a category
-@app.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
-def editCategory(category_id):
-    editedCategory = session.query(magicCategory).filter_by(id = category_id).one()
+@app.route('/category/<int:cat_id>/edit', methods=['GET', 'POST'])
+def editCategory(cat_id):
+    editCat = session.query(magicCategory).filter_by(id=cat_id).one()
 
     # Set page title
-    title = ('Edit %s' % editedCategory.name)
+    t = ('Edit %s' % editCat.name)
 
-    # add user picture
-    picture = login_session['picture']
-
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Ensure only creator can edit category
-    if editedCategory.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized to edit this category. Please create your own category in order to edit.');}</script><body onload='myFunction()'>"
+    if editCat.user_id != login_session['user_id']:
+        error = "<script>function myFunction() "
+        error += "{alert('You are not authorized to edit this"
+        error += " category. Please create your own category "
+        error += "in order to edit.');}</script><body "
+        error += "onload='myFunction()'>"
+        return error
 
     if request.method == 'POST':
         if request.form['name']:
-            editedCategory.name = request.form['name']
-        session.add(editedCategory)
-        flash('%s Successfully Edited' % editedCategory.name)
+            editCat.name = request.form['name']
+        session.add(editCat)
+        flash('%s Successfully Edited' % editCat.name)
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
-        return render_template('editCategory.html', category = editedCategory, title = title, picture = picture)
+        # add user picture
+        p = login_session['picture']
+        return render_template('eCat.html', category=editCat, t=t, p=p)
+
 
 # Delete a category
-@app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
-def deleteCategory(category_id):
-    deletionCategory = session.query(magicCategory).filter_by(id = category_id).one()
+@app.route('/category/<int:cat_id>/delete', methods=['GET', 'POST'])
+def deleteCategory(cat_id):
+    dCat = session.query(magicCategory).filter_by(id=cat_id).one()
 
     # Set page title
-    title = ('Delete %s' % deletionCategory.name)
+    t = ('Delete %s' % dCat.name)
 
     # add user picture
-    picture = login_session['picture']
+    p = login_session['picture']
 
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Ensure only creator can delete category
-    if deletionCategory.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized to delete this category. Please create your own category in order to delete.');}</script><body onload='myFunction()'>"
+    if dCat.user_id != login_session['user_id']:
+        error = "<script>function myFunction() "
+        error += "{alert('You are not authorized to "
+        error += "delete this category. Please create "
+        error += "your own category in order to delete."
+        error += "');}</script><body onload='myFunction()'>"
+        return error
 
     if request.method == 'POST':
-        session.delete(deletionCategory)
-        flash('%s Successfully Deleted' % deletionCategory.name)
+        session.delete(dCat)
+        flash('%s Successfully Deleted' % dCat.name)
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
-        return render_template('deleteCategory.html', category = deletionCategory, title = title, picture = picture)
+        return render_template('dCat.html', category=dCat, t=t, p=p)
+
 
 # Show a category
-@app.route('/category/<int:category_id>')
-def showCategory(category_id):
-    category = session.query(magicCategory).filter_by(id = category_id).one()
-    creator = getUserInfo(magicCategory.user_id)
-    items = session.query(Item).filter_by(category_id = category_id).all()
+@app.route('/category/<int:cat_id>')
+def showCategory(cat_id):
+    c = session.query(magicCategory).filter_by(id=cat_id).one()
+    o = getUserInfo(magicCategory.user_id)
+    i = session.query(Item).filter_by(category_id=cat_id).all()
 
     # Set page title
-    title = ('%s' % category.name)
-
-
+    t = ('%s' % c.name)
 
     # If there are no items in the category, display a message
-    message = ''
-    if not items:
-        message = "Your category doesn't have any items yet"
+    m = ''
+    if not i:
+        m = "Your category doesn't have any items yet"
 
-    #Check to see if user is logged if user is logged in
-    if 'username' not in login_session or creator.id != login_session['user_id']:
-        return render_template('publicCategory.html', items = items, category = category, message = message, creator=creator, title = title)
+    # Check to see if user is logged if user is logged in
+    user = login_session['user_id']
+    if 'username' not in login_session or o.id != user:
+        return render_template('pCat.html', i=i, c=c, m=m, o=o, t=t)
     else:
         # add user picture
-        picture = login_session['picture']
-        return render_template('category.html', items = items, category = category, message = message, creator=creator, title = title, picture = picture)
+        p = login_session['picture']
+        return render_template('cat.html', i=i, c=c, m=m, o=o, t=t, p=p)
+
 
 # Create a new item
-@app.route('/item/<int:category_id>/new', methods=['GET', 'POST'])
-def newItem(category_id):
-    category = session.query(magicCategory).filter_by(id = category_id).one()
+@app.route('/item/<int:cat_id>/new', methods=['GET', 'POST'])
+def newItem(cat_id):
+    category = session.query(magicCategory).filter_by(id=cat_id).one()
 
     # Set page title
-    title = ('New Magic Item')
+    t = ('New Magic Item')
 
     # add user picture
-    picture = login_session['picture']
+    p = login_session['picture']
 
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Ensure only category creator can add items
     if login_session['user_id'] != category.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to add items to this category. Please create your own category in order to add items.');}</script><body onload='myFunction()'>"
+        error = "<script>function myFunction() "
+        error += "{alert('You are not authorized to add "
+        error += "items to this category. Please create your "
+        error += "own category in order to add items.');}"
+        error += "</script><body onload='myFunction()'>"
+        return error
 
     if request.method == 'POST':
-        newItem = Item(name = request.form['name'], price = request.form['price'], description = request.form['description'], category_id = category_id, user_id=category.user_id)
-        session.add(newItem)
-        flash('%s Successfully Created' % newItem.name)
+        n = request.form['name']
+        p = request.form['price']
+        d = request.form['description']
+        c = cat_id
+        u = category.user_id
+        nItem = Item(name=n, price=p, description=d, category_id=c, user_id=u)
+        session.add(nItem)
+        flash('%s Successfully Created' % nItem.name)
         session.commit()
-        return redirect(url_for('showCategory', category_id = category_id))
+        return redirect(url_for('showCategory', cat_id=cat_id))
     else:
-        return render_template('newItem.html', category = category, title = title, picture = picture)
+        return render_template('newItem.html', category=category, t=t, p=p)
+
 
 # Edit an item
-@app.route('/item/<int:category_id>/<int:item_id>/edit', methods=['GET', 'POST'])
-def editItem(category_id, item_id):
-    category = session.query(magicCategory).filter_by(id = category_id).one()
-    editedItem = session.query(Item).filter_by(id = item_id).one()
+@app.route('/item/<int:cat_id>/<int:item_id>/edit', methods=['GET', 'POST'])
+def editItem(cat_id, item_id):
+    category = session.query(magicCategory).filter_by(id=cat_id).one()
+    e = session.query(Item).filter_by(id=item_id).one()
 
     # Set page title
-    title = ('Edit %s' % editedItem.name)
+    t = ('Edit %s' % e.name)
 
     # add user picture
-    picture = login_session['picture']
+    p = login_session['picture']
 
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Ensure only category creator can edit items
     if login_session['user_id'] != category.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to edit items this category. Please create your own category in order to edit items.');}</script><body onload='myFunction()'>"
+        error = "<script>function myFunction() "
+        error += "{alert('You are not authorized to edit "
+        error += "items this category. Please create your own "
+        error += "category in order to edit items.');}"
+        error += "</script><body onload='myFunction()'>"
+        return error
 
     if request.method == 'POST':
         if request.form['name']:
-            editedItem.name = request.form['name']
+            e.name = request.form['name']
         if request.form['description']:
-            editedItem.description = request.form['description']
+            e.description = request.form['description']
         if request.form['price']:
-            editedItem.price = request.form['price']
-        session.add(editedItem)
-        flash('%s Successfully Edited' % editedItem.name)
+            e.price = request.form['price']
+        session.add(e)
+        flash('%s Successfully Edited' % e.name)
         session.commit()
-        return redirect(url_for('showCategory', category_id = category_id))
+        return redirect(url_for('showCategory', cat_id=cat_id))
     else:
-        return render_template('editItem.html', item = editedItem, category_id = category_id, title = title, picture = picture)
+        return render_template('eItem.html', item=e, cat_id=cat_id, t=t, p=p)
+
 
 # Delete an item
-@app.route('/item/<int:category_id>/<int:item_id>/delete', methods=['GET', 'POST'])
-def deleteItem(category_id, item_id):
-    category = session.query(magicCategory).filter_by(id = category_id).one()
-    deletionItem = session.query(Item).filter_by(id = item_id).one()
+@app.route('/item/<int:cat_id>/<int:item_id>/delete', methods=['GET', 'POST'])
+def deleteItem(cat_id, item_id):
+    category = session.query(magicCategory).filter_by(id=cat_id).one()
+    d = session.query(Item).filter_by(id=item_id).one()
 
     # Set page title
-    title = ('Delete %s' % deletionItem.name)
+    t = ('Delete %s' % d.name)
 
     # add user picture
-    picture = login_session['picture']
+    p = login_session['picture']
 
-    #Check to see if user is logged if user is logged in
+    # Check to see if user is logged if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
 
     # Ensure only category creator can delete items
     if login_session['user_id'] != category.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to delete items in this category. Please create your own category in order to delete items.');}</script><body onload='myFunction()'>"
+        error = "<script>function myFunction() "
+        error += "{alert('You are not authorized to "
+        error += "delete items in this category. Please"
+        error += " create your own category in order to "
+        error += "delete items.');}</script><body "
+        error += "onload='myFunction()'>"
+        return error
 
     if request.method == 'POST':
-        session.delete(deletionItem)
-        flash('%s Successfully Deleted' % deletionItem.name)
+        session.delete(d)
+        flash('%s Successfully Deleted' % d.name)
         session.commit()
-        return redirect(url_for('showCategory', category_id = category.id))
+        return redirect(url_for('showCategory', cat_id=category.id))
     else:
-        return render_template('deleteItem.html', item = deletionItem, category_id = category.id, title = title, picture = picture)
+        return render_template('dI.html', item=d, cat_id=category.id, t=t, p=p)
+
 
 # Catalog API Endpoint
 @app.route('/catalog/JSON')
@@ -399,15 +437,16 @@ def catalogJSON():
     categories = session.query(magicCategory).all()
     return jsonify(magicCategory=[i.serialize for i in categories])
 
+
 # Category API Endpoint
-@app.route('/category/<int:category_id>/JSON')
-def categoryJSON(category_id):
-    category = session.query(magicCategory).filter_by(id = category_id).one()
-    items = session.query(Item).filter_by(category_id = category_id).all()
+@app.route('/category/<int:cat_id>/JSON')
+def categoryJSON(cat_id):
+    category = session.query(magicCategory).filter_by(id=cat_id).one()
+    items = session.query(Item).filter_by(cat_id=cat_id).all()
     return jsonify(Item=[i.serialize for i in items])
 
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
-    app.run(host = '0.0.0.0', port = 5000)
+    app.run(host='0.0.0.0', port=5000)

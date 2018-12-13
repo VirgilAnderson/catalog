@@ -15,15 +15,15 @@
       {% endwith %}
   </div>
 
-  <h1>{{category.name}}</h1>
-  <p>{{message}}</p>
+  <h1>{{c.name}}</h1>
+  <p>{{m}}</p>
   <section class='flex-box'>
-    {% for i in items%}
+    {% for i in i%}
     <div class='item'>
       <h3>{{i.name}}</h3>
       <p>{{i.description}}</p>
       <p>{{i.price}}</p>
-      <p>Owner: {{creator.name}}</p>
+      <p>Owner: {{o.name}}</p>
     </div>
     {% endfor %}
   </section>

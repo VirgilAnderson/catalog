@@ -4,7 +4,7 @@
 {% include "navigation.html" %}
 <main>
   <h1>Delete {{item.name}}</h1>
-  <form action="{{url_for('deleteItem', category_id = category_id, item_id = item.id)}}" method="post">
+  <form action="{{url_for('deleteItem', cat_id = cat_id, item_id = item.id)}}" method="post">
     <fieldset>
       <p>
         <label for='delete'>Are you sure you want to delete {{item.name}}?</label>
@@ -14,7 +14,7 @@
       </p>
     </fieldset>
   </form>
-  <a href='{{url_for('showCategory', category_id = category_id)}}'>Cancel</a>
+  <a href='{{url_for('showCategory', cat_id = cat_id)}}'>Cancel</a>
 </main>
 {% include "footer.html" %}
 {% endblock %}

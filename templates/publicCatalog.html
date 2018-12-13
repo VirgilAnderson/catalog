@@ -15,10 +15,10 @@
   </div>
   <p>{{message}}</p>
   <section class='flex-row'>
-    {% for c in categories%}
+    {% for c in c%}
     <div class='category'>
       <h2>
-        <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
+        <a href='{{url_for('showCategory', cat_id = c.id)}}'>{{c.name}}</a>
       </h2>
     </div>
     {% endfor %}

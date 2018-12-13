@@ -3,7 +3,7 @@
 {% include "header.html" %}
 {% include "navigation.html" %}
 <main>
-  <form action="{{url_for('editItem', item_id = item.id, category_id = category_id)}}" method='POST'>
+  <form action="{{url_for('editItem', item_id = item.id, cat_id = cat_id)}}" method='POST'>
     <h1>Edit {{item.name}}</h1>
     <fieldset>
       <p>
@@ -23,7 +23,7 @@
       </p>
     </fieldset>
   </form>
-  <a href='{{url_for('showCategory', category_id = category_id)}}'>Cancel</a>
+  <a href='{{url_for('showCategory', cat_id = cat_id)}}'>Cancel</a>
 </main>
 {% include "footer.html" %}
 {% endblock %}

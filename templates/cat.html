@@ -15,24 +15,24 @@
       {% endif %}
       {% endwith %}
   </div>
-  <h1>{{category.name}}</h1>
+  <h1>{{c.name}}</h1>
   <p>{{message}}</p>
   <div>
-    <a href="{{url_for('newItem', category_id = category.id)}}">New Item</a>
+    <a href="{{url_for('newItem', cat_id = c.id)}}">New Item</a>
   </div>
   <section class='flex-box'>
-    {% for i in items%}
+    {% for i in i%}
     <div class='item'>
       <h3>{{i.name}}</h3>
       <p>{{i.description}}</p>
       <p>{{i.price}}</p>
-      <p>Owner: {{creator.name}}</p>
+      <p>Owner: {{o.name}}</p>
       <p>
         <div>
-          <a href='{{url_for('editItem', category_id = category.id, item_id = i.id)}}'>Edit</a>
+          <a href='{{url_for('editItem', cat_id = c.id, item_id = i.id)}}'>Edit</a>
         </div>
         <div>
-          <a href='{{url_for('deleteItem', category_id = category.id, item_id = i.id)}}'>Delete</a>
+          <a href='{{url_for('deleteItem', cat_id = c.id, item_id = i.id)}}'>Delete</a>
         </div>
       </p>
     </div>
