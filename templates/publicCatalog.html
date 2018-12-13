@@ -1,7 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-{% include "navigation.html" %}
 <main>
   <div class = 'flash'>
       {% with messages = get_flashed_messages() %}
@@ -14,14 +13,12 @@
       {% endif %}
       {% endwith %}
   </div>
-
-  <h1>Hocus Pocus Magic Catalog</h1>
   <p>{{message}}</p>
   <section>
     {% for c in categories%}
-    <p>
+    <h2>
       <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-    </p>
+    </h2>
     {% endfor %}
   </section>
 </main>

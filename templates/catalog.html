@@ -20,9 +20,9 @@
 	</div>
 	<section>
 	  {% for c in categories%}
-	  <p>
+	  <h2>
 	    <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-	  </p>
+	  </h2>
 	  <p>
 	    <div>
 	      <a href='{{url_for('editCategory', category_id = c.id)}}'>Edit</a>
@@ -34,9 +34,5 @@
 	  {% endfor %}
 	</section>
 </main>
-
-
-
-
-  {% include "footer.html" %}
+{% include "footer.html" %}
 {% endblock %}

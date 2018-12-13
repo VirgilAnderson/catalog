@@ -39,6 +39,7 @@ main{
   width: 90%;
   margin: 0;
   padding: 0 5%;
+  min-height: 450px;
 }
 nav{
   width: 90%;
@@ -51,6 +52,13 @@ nav a{
 }
 nav a:hover{
   color: #716C82;
+}
+footer{
+  width: 90%;
+  margin: 0;
+  padding: .5% 5%;
+  background-color: #18132B;
+  color: white;
 }
 
 
