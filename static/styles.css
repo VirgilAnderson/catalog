@@ -17,8 +17,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Times New Roman", Times, serif;
     color: white;
 }
+a {
+  color: white;
+}
+a:hover{
+  color: #716C82;
+}
 
 /* Header Section */
+
 header{
   margin: 0;
   padding: 1% 2%;
@@ -40,18 +47,17 @@ header{
 }
 
 /* navigation */
+
 nav{
   width: 90%;
   margin: 0 0 1% 0;
   padding: 1% 5%;
   background-color: #221D31;
 }
-nav a{
-  color: white;
-}
 nav a:hover{
-  color: #716C82;
+    color: #716C82;
 }
+
 
 /* body */
 
@@ -74,9 +80,6 @@ main{
   background-color: #534E64;
   opacity: .95;
 }
-.category a{
-  color: white;
-}
 .category a:hover{
   color: #18132B;
 }
@@ -86,9 +89,6 @@ main{
   padding: 1% 2%;
   background-color: #534E64;
   opacity: .95;
-}
-.item a{
-  color: white;
 }
 .item a:hover{
   color: #18132B;
