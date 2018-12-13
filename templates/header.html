@@ -1,7 +1,14 @@
 <header>
-  {%if 'username' not in session %}
-  <a href="{{url_for('showLogin')}}">Click Here to Login </a>
-  {% else %}
-  <a href="{{url_for('gdisconnect')}}">Logout </a>
-  {% endif %}
+  <div class='flex-container'>
+    <div class='logo'>
+      <h1>Hocus Pocus Magic Catalog</h1>
+    </div>
+    <div class='signIn'>
+      {%if 'username' not in session %}
+      <a href="{{url_for('showLogin')}}">Click Here to Login </a>
+      {% else %}
+      <a href="{{url_for('gdisconnect')}}">Logout </a>
+      {% endif %}
+    </div>
+  </div>
 </header>

@@ -3,7 +3,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1em;
-    background-color: #B4C788;
+    background-color: #363242;
     background-image: url(magic-background.jpg);
     background-position: center;
     background-repeat: none;
@@ -20,6 +20,26 @@ header{
   margin: 0;
   padding: 1% 2%;
   width: 96%;
-  background-color: #391A4E;
-  border-top: 8px solid #9E8DAB;
+  background-color: #18132B;
+  border-top: 8px solid #716C82;
 }
+.logo{
+  width: 80%;
+}
+.signIn{
+  width: 10%;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+/*
+.color-primary-0 { color: #363242 } - color
+.color-primary-1 { color: #716C82 } - light
+.color-primary-2 { color: #534E64 } - light med
+.color-primary-3 { color: #221D31 } - med dark
+.color-primary-4 { color: #18132B } - dark
+*/
