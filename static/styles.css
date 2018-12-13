@@ -76,6 +76,10 @@ main{
 .flex-row {
   display: flex;
   flex-direction: row;
+<<<<<<< HEAD
+=======
+  align-items: center;
+>>>>>>> styling
   flex-wrap: wrap;
 }
 .category{

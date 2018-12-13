@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Edit Category</title>
-  </head>
-  <body>
-    <h1>This page will allow me to edit a category</h1>
-    <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
-      <fieldset>
-        <p>
-          <label for='name'>Category Name:</label><br>
-          <input type='text' name='name' placeholder='{{category.name}}'>
-        </p>
-        <p>
-          <input type='submit' value='Edit'>
-        </p>
-      </fieldset>
-    </form>
-    <a href='{{url_for('showCatalog')}}'>Cancel</a>
-  </body>
-</html>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navigation.html" %}
+<main>
+  <h1>Edit {{category.name}}</h1>
+  <form action='{{url_for('editCategory', category_id = category.id)}}' method="post">
+    <fieldset>
+      <p>
+        <label for='name'>Category Name:</label><br>
+        <input type='text' name='name' placeholder='{{category.name}}'>
+      </p>
+      <p>
+        <input type='submit' value='Edit'>
+      </p>
+    </fieldset>
+  </form>
+  <a href='{{url_for('showCatalog')}}'>Cancel</a>
+</main>
+{% include "footer.html" %}
+{% endblock %}

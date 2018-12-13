@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Catalog</title>
-  </head>
-  <body>
-    <div class="col-md-6 text-right">
-					{%if 'username' not in session %}
-			<a href="{{url_for('showLogin')}}">Click Here to Login </a>
-			{% else %}
-			<a href="{{url_for('gdisconnect')}}">Logout </a>
-			{% endif %}
-
-	  </div>
-
-    <div class = 'flash'>
-		    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-          {% for message in messages %}
-          <li><strong> {{ message }} </strong></li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    </div>
-
-    <h1>Hocus Pocus Magic Catalog</h1>
-    <p>{{message}}</p>
-    <section>
-      {% for c in categories%}
-      <p>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<main>
+  <div class = 'flash'>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li><strong> {{ message }} </strong></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+  </div>
+  <p>{{message}}</p>
+  <section class='flex-row'>
+    {% for c in categories%}
+    <div class='category'>
+      <h2>
         <a href='{{url_for('showCategory', category_id = c.id)}}'>{{c.name}}</a>
-      </p>
-      {% endfor %}
-    </section>
-  </body>
-</html>
+      </h2>
+    </div>
+    {% endfor %}
+  </section>
+</main>
+{% include "footer.html" %}
+{% endblock %}

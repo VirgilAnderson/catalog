@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Delete Category</title>
-  </head>
-  <body>
-    <main>
-      <form action='{{url_for('deleteCategory', category_id = category.id)}}' method="POST">
-        <fieldset>
-          <p>
-            <label for='delete'>Are you sure you want to delete {{category.name}}?</label>
-          </p>
-          <p>
-            <input type='submit' value='Delete'>
-          </p>
-        </fieldset>
-      </form>
-      <a href='{{url_for('showCatalog')}}'>Cancel</a>
-    </main>
-  </body>
-</html>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navigation.html" %}
+<main>
+  <form action='{{url_for('deleteCategory', category_id = category.id)}}' method="POST">
+    <h1>Delete {{category.name}}</h1>
+    <fieldset>
+      <p>
+        <label for='delete'>Are you sure you want to delete {{category.name}}?</label>
+      </p>
+      <p>
+        <input type='submit' value='Delete'>
+      </p>
+    </fieldset>
+  </form>
+  <a href='{{url_for('showCatalog')}}'>Cancel</a>
+</main>
+{% include "footer.html" %}
+{% endblock %}
