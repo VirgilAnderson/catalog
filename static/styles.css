@@ -73,9 +73,15 @@ main{
   align-items: left;
   flex-wrap: wrap;
 }
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .category{
-  width: 30%;
-  margin: 1% 0;
+  width: 25%;
+  margin: 1% 1% 1% 0;
   padding: 1% 2%;
   background-color: #534E64;
   opacity: .95;
