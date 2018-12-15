@@ -448,7 +448,7 @@ def catalogJSON():
 @app.route('/category/<int:cat_id>/JSON')
 def categoryJSON(cat_id):
     category = session.query(magicCategory).filter_by(id=cat_id).one()
-    items = session.query(Item).filter_by(cat_id=cat_id).all()
+    items = session.query(Item).filter_by(category_id=cat_id).all()
     return jsonify(Item=[i.serialize for i in items])
 
 
