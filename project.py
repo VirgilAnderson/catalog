@@ -314,7 +314,6 @@ def showCategory(cat_id):
         m = "Your category doesn't have any items yet"
 
     # Check to see if user is logged if user is logged in
-    user = login_session['user_id']
     if 'username' not in login_session or o.id != user:
         return render_template('pCat.html', i=i, c=c, m=m, o=o, t=t)
     else:
