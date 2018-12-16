@@ -124,7 +124,7 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;'
+    output += ' " style = "width: 150px; height: 150px;'
     output += 'border-radius: 150px; -webkit-border-radius: 150px;'
     output += '-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
