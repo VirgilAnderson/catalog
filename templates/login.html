@@ -17,7 +17,8 @@
     {% include "navigation.html" %}
     <main>
       <div id="signinButton">
-        <span class="g-signin"
+        <span
+          class="g-signin"
           data-scope="openid email"
           data-clientid="237388413324-5o8s7s237csuaof8981onub4ilfa9j2o.apps.googleusercontent.com"
           data-redirecturi="postmessage"
@@ -30,6 +31,7 @@
 
       <div id="result"></div>
     </main>
+
     <script>
 function signInCallback(authResult) {
   if (authResult['code']) {
