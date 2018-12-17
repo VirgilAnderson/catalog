@@ -353,7 +353,8 @@ def newItem(cat_id):
         error = "<script>function myFunction() "
         error += "{alert('You are not authorized to add "
         error += "items to this category. Please create your "
-        error += "own category in order to add items.');}"
+        error += "own category in order to add items.');"
+        error += "window.location.href = '/';}"
         error += "</script><body onload='myFunction()'>"
         return error
 
