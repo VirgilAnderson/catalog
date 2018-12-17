@@ -253,7 +253,7 @@ def editCategory(cat_id):
         error = "<script>function myFunction() "
         error += "{alert('You are not authorized to edit this"
         error += " category. Please create your own category "
-        error += "in order to edit.'); "
+        error += "in order to edit.');"
         error += "window.location.href = '/';}</script><body "
         error += "onload='myFunction()'>"
         return error
@@ -292,7 +292,8 @@ def deleteCategory(cat_id):
         error += "{alert('You are not authorized to "
         error += "delete this category. Please create "
         error += "your own category in order to delete."
-        error += "');}</script><body onload='myFunction()'>"
+        error += "'); window.location.href = '/';"
+        error += "}</script><body onload='myFunction()'>"
         return error
 
     if request.method == 'POST':
