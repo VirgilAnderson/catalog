@@ -153,9 +153,8 @@ def getUserInfo(user_id):
 
 
 def getUserID(email):
-        user = session.query(User).filter_by(email=email).one_or_none()
-        return user.id if user else None
-
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
@@ -308,7 +307,7 @@ def deleteCategory(cat_id):
 @app.route('/category/<int:cat_id>')
 def showCategory(cat_id):
     c = session.query(magicCategory).filter_by(id=cat_id).one()
-    o = getUserInfo(magicCategory.user_id)
+    o = getUserInfo(c.user_id)
     i = session.query(Item).filter_by(category_id=cat_id).all()
 
     # Set page title
