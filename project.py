@@ -253,7 +253,8 @@ def editCategory(cat_id):
         error = "<script>function myFunction() "
         error += "{alert('You are not authorized to edit this"
         error += " category. Please create your own category "
-        error += "in order to edit.');}</script><body "
+        error += "in order to edit.'); "
+        error += "window.location.href = '/';}</script><body "
         error += "onload='myFunction()'>"
         return error
 
