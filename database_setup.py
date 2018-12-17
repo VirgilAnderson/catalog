@@ -8,6 +8,9 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 class User(Base):
+    """
+    This is the base for registered users
+    """
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
@@ -17,6 +20,9 @@ class User(Base):
 
 
 class magicCategory(Base):
+    """
+    This the is base for magic categories
+    """
 
     __tablename__ = 'magicCategory'
 
@@ -33,6 +39,9 @@ class magicCategory(Base):
 
 
 class Item(Base):
+    """
+    This is the base for the items within the magic categories
+    """
 
     __tablename__ = 'item'
 
