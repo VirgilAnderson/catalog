@@ -153,8 +153,8 @@ def getUserInfo(user_id):
 
 
 def getUserID(email):
-        user = session.query(User).filter_by(email=email).one()
-        return user.id
+        user = session.query(User).filter_by(email=email).one_or_none()
+        return user.id if user else None
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
