@@ -98,7 +98,7 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),200)
+        response = make_response(json.dumps('User already connected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -155,6 +155,7 @@ def getUserInfo(user_id):
 def getUserID(email):
         user = session.query(User).filter_by(email=email).one()
         return user.id
+
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
@@ -462,11 +463,13 @@ def categoryJSON(cat_id):
     items = session.query(Item).filter_by(category_id=cat_id).all()
     return jsonify(Item=[i.serialize for i in items])
 
+
 # User API Endpoint
 @app.route('/user/JSON')
 def categoryJSON():
     user = session.query(User).all()
     return jsonify(User=[i.serialize for i in user])
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'

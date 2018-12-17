@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+
 class User(Base):
     """
     This is the base for registered users
@@ -21,12 +22,11 @@ class User(Base):
     @property
     def serialize(self):
         return {
-        'id' : self.id,
-        'name': self.name,
-        'email': self.email,
-        'picture': self.picture,
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'picture': self.picture,
         }
-
 
 
 class magicCategory(Base):
@@ -36,17 +36,17 @@ class magicCategory(Base):
 
     __tablename__ = 'magicCategory'
 
-    id = Column(Integer, primary_key = True)
-    name = Column(String(80), nullable = False)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
     @property
     def serialize(self):
         return {
-        'name' : self.name,
-        'user_id' : self.user_id,
-        'id' : self.id,
+            'name': self.name,
+            'user_id': self.user_id,
+            'id': self.id,
         }
 
 
@@ -57,8 +57,8 @@ class Item(Base):
 
     __tablename__ = 'item'
 
-    name = Column(String(80), nullable = False)
-    id = Column(Integer, primary_key = True)
+    name = Column(String(80), nullable=False)
+    id = Column(Integer, primary_key=True)
     description = Column(String(250))
     price = Column(String(8))
     category_id = Column(Integer, ForeignKey('magicCategory.id'))
@@ -69,11 +69,12 @@ class Item(Base):
     @property
     def serialize(self):
         return {
-        'id' : self.id,
-        'name' : self.name,
-        'price' : self.price,
-        'description' : self.description,
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'description': self.description,
         }
+
 
 engine = create_engine('sqlite:///magicCatalogUsers.db')
 Base.metadata.create_all(engine)
