@@ -148,8 +148,8 @@ def createUser(login_session):
 
 
 def getUserInfo(user_id):
-    user = session.query(User).filter_by(id=user_id).one()
-    return user
+    user = session.query(User).filter_by(id=user_id).one_or_none()
+    return user if user else None
 
 
 def getUserID(email):
