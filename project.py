@@ -318,12 +318,16 @@ def showCategory(cat_id):
     if not i:
         m = "Your category doesn't have any items yet"
 
+    # add picture if available
+    if 'picture' in login_session:
+        p = login_session['picture']
+    else:
+        p = ''
+
     # Check to see if user is logged if user is logged in
     if 'username' not in login_session or o.id != login_session['user_id']:
-        return render_template('pCat.html', i=i, c=c, m=m, o=o, t=t)
+        return render_template('pCat.html', i=i, c=c, m=m, o=o, t=t, p=p)
     else:
-        # add user picture
-        p = login_session['picture']
         return render_template('cat.html', i=i, c=c, m=m, o=o, t=t, p=p)
 
 
