@@ -462,6 +462,11 @@ def categoryJSON(cat_id):
     items = session.query(Item).filter_by(category_id=cat_id).all()
     return jsonify(Item=[i.serialize for i in items])
 
+# User API Endpoint
+@app.route('/user/JSON')
+def categoryJSON():
+    user = session.query(User).all()
+    return jsonify(User=[i.serialize for i in user])
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'

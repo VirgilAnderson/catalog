@@ -18,6 +18,16 @@ class User(Base):
     email = Column(String(250), nullable=False)
     picture = Column(String(250))
 
+    @property
+    def serialize(self):
+        return {
+        'id' : self.id,
+        'name': self.name,
+        'email': self.email,
+        'picture': self.picture,
+        }
+
+
 
 class magicCategory(Base):
     """
@@ -34,7 +44,9 @@ class magicCategory(Base):
     @property
     def serialize(self):
         return {
-        'name' : self.name
+        'name' : self.name,
+        'user_id' : self.user_id,
+        'id' : self.id,
         }
 
 
