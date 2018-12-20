@@ -466,7 +466,7 @@ def categoryJSON(cat_id):
 
 # User API Endpoint
 @app.route('/user/JSON')
-def categoryJSON():
+def userJSON():
     user = session.query(User).all()
     return jsonify(User=[i.serialize for i in user])
 
